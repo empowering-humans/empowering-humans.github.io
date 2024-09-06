@@ -73,12 +73,11 @@ pre {
 }
 
 .link a {
-  color: #3498db;
   text-decoration: none;
 }
 
-.link a:hover {
-  text-decoration: underline;
+.link .icon {
+  padding-right: 5pt;
 }
 
 .university-logos {
@@ -93,12 +92,13 @@ pre {
   margin: 0 10px;
 }
 
-.authors, .university {
-    margin-bottom: 0.5ex;
-    font-size: 15pt;
+.authors,
+.university {
+  margin-bottom: 0.5ex;
+  font-size: 15pt;
 }
 
-.author+.author {
+.author + .author {
   margin-left: 1em;
 }
 
@@ -134,10 +134,10 @@ pre {
 }
 
 .button {
-  background-color: #fff;
+  background-color: #363636;
   border-color: #dbdbdb;
   border-width: 1px;
-  color: #363636;
+  color: #fff;
   cursor: pointer;
   justify-content: center;
   padding-bottom: calc(0.5em - 1px);
@@ -147,7 +147,31 @@ pre {
   text-align: center;
   white-space: nowrap;
   font-size: 1rem;
+  border-radius: 290486px;
+  padding-left: calc(1em + 0.25em);
+  padding-right: calc(1em + 0.25em);
+  text-decoration: none;
 }
-.button strong {
-  color: inherit;
+
+.button:hover {
+  background-color: #4a4a4a;
 }
+
+.centered {
+  width: 100%;
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gif_legend {
+  display: flex;
+  padding: 0 1em;
+}
+
+.gif_legend img {
+  width: 2em;
+  margin-right: 0.5em;
+}
+
