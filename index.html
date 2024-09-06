@@ -37,6 +37,13 @@
             justify-content: center;
             align-items: center;
         }
+        .centered {
+            width: 100%;
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         code {
             background-color: #f0f0f0;
             padding: 2px 4px;
@@ -81,6 +88,14 @@
         .university-logos img {
             max-height: 60px;
             margin: 0 10px;
+        }
+        .gif_legend {
+            display: flex;
+            padding: 0 1em;
+        }
+        .gif_legend img {
+            width: 2em;
+            margin-right: 0.5em;
         }
     </style>
     <!-- MathJax Configuration -->
@@ -137,6 +152,20 @@
     </header>
 
     <main>
+        <div class="centered">
+            <img style="margin: 0"
+                 src="figures/coord_ring_collab_onion-cut.gif"/>
+        </div>
+        <div class="centered">
+            <div class="gif_legend">
+                <img src="figures/human_triangle.svg"/>
+                <p>Human Policy</p>
+            </div>
+            <div class="gif_legend">
+                <img src="figures/esr_triangle.svg"/>
+                <p>Empowerment Policy (ESR)</p>
+            </div>
+        </div>
         <section>
             <h2>Abstract</h2>
             <p>
@@ -145,7 +174,7 @@ Empirically, our proposed method outperforms prior methods on synthetic benchmar
             </p>
         </section>
         <section>
-            <h2>Key Insight: Empowerment via Successor Representations</h2>
+            <h2>Our Method: Empowerment via Successor Representations</h2>
             <p>Our core contribution is a novel objective for training agents that are intrinsically motivated to assist humans without requiring a model of the human's reward function. Our objective, Empowerment via Successor Representations (ESR), maximizes the influence of the human's actions on the environment, and, unlike past approaches for assistance without reward inference, is based on a scalable model-free objective that can be derived from learned successor features that encode which states the human is likely to want to reach given their current action. Our objective empowers the human to reach the desired states, not all states, without assuming a human model.</p>
             <p>Our method will learn three representations:</p>
             <ol>
@@ -156,6 +185,12 @@ Empirically, our proposed method outperforms prior methods on synthetic benchmar
             <p>We then use these learned representations to compute the
                 approximate empowerment reward:</p>
             $$r(s, \ar) = (\phi(s_t, \ar, \ah) - \phi(s_t, \ar))^T \psi(g)$$
+            <p>which we use to train an assistive policy
+                <em>without estimating the human's reward.</em></p>
+        </section>
+        <section>
+            <h2>Analyzing the Empowerment Objective</h2>
+            <p></p>
         </section>
 
         <section>
