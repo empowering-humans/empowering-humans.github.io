@@ -1,1 +1,161 @@
-Hello World
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning to Assist Humans without Inferring Rewards</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        h2, h3, h4 {
+            color: #34495e;
+        }
+        img, video {
+            max-width: 100%;
+            height: auto;
+            margin: 20px 0;
+        }
+        .chart {
+            width: 100%;
+            height: 400px;
+            background-color: #f0f0f0;
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        .links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .link-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 20px;
+        }
+        .link-item img {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 5px;
+        }
+        .link-item a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        .link-item a:hover {
+            text-decoration: underline;
+        }
+        .university-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .university-logos img {
+            max-height: 60px;
+            margin: 0 10px;
+        }
+    </style>
+    <!-- MathJax Configuration -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+    </script>
+    <!-- Load MathJax library -->
+    <script type="text/javascript" id="MathJax-script" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-svg.js">
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Learning to Assist Humans without Inferring Rewards</h1>
+        <p>Vivek Myers<sup>1</sup>, Evan Ellis<sup>1</sup>, Ben Eysenbach<sup>2</sup>, Sergey Levine<sup>1</sup>, Anca Dragan<sup>1</sup></p>
+        <p>UC Berkeley, Princeton University</p>
+        <div class="links">
+            <div class="link-item">
+                <img src="logos/github-mark.png" alt="GitHub Logo">
+                <a href="#" target="_blank">GitHub</a>
+            </div>
+            <div class="link-item">
+                <img src="logos/arxiv-logo.svg" alt="arXiv Logo">
+                <a href="#" target="_blank">arXiv</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section>
+            <h2>Introduction</h2>
+            <p>Your introduction text goes here... You can include inline equations like $E = mc^2$ or display equations like:</p>
+            $$\nabla \times \mathbf{B} = \mu_0\left(\mathbf{J} + \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t}\right)$$
+        </section>
+
+        <section>
+            <h2>Methodology</h2>
+            <p>Describe your methodology here...</p>
+        </section>
+
+        <section>
+            <h2>Results</h2>
+            <p>Present your results here...</p>
+            <div class="chart">
+                <!-- Replace this div with your actual chart or visualization -->
+                <p>Your chart or visualization goes here</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Discussion</h2>
+            <p>Discuss your findings here...</p>
+        </section>
+
+        <section>
+            <h2>Conclusion</h2>
+            <p>Summarize your conclusions here...</p>
+        </section>
+    </main>
+
+    <script>
+        // You can add any necessary JavaScript here
+        document.addEventListener('DOMContentLoaded', (event) => {
+            console.log('DOM fully loaded and parsed');
+            // Add your custom JavaScript functionality here
+        });
+    </script>
+</body>
+</html>
