@@ -102,10 +102,28 @@
     </script>
 </head>
 <body>
+    <script type="text/javascript">
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                macros: {
+                    human: "\\textbf{H}",
+                    robot: "\\textbf{R}",
+                    ar: "a^{\\human}",
+                    ah: "a^{\\robot}",
+                }
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
     <header>
         <h1>Learning to Assist Humans without Inferring Rewards</h1>
         <p>Vivek Myers<sup>1</sup>, Evan Ellis<sup>1</sup>, Ben Eysenbach<sup>2</sup>, Sergey Levine<sup>1</sup>, Anca Dragan<sup>1</sup></p>
-        <p>UC Berkeley, Princeton University</p>
+        <p>UC Berkeley<sup>1</sup>, Princeton University<sup>2</sup></p>
         <div class="links">
             <div class="link-item">
                 <img src="logos/github-mark.png" alt="GitHub Logo">
@@ -120,14 +138,24 @@
 
     <main>
         <section>
-            <h2>Introduction</h2>
-            <p>Your introduction text goes here... You can include inline equations like $E = mc^2$ or display equations like:</p>
-            $$\nabla \times \mathbf{B} = \mu_0\left(\mathbf{J} + \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t}\right)$$
+            <h2>Abstract</h2>
+            <p>
+                Assistive agents should make humans' lives easier. Classically, such assistance is studied through the lens of inverse reinforcement learning, where an assistive agent (e.g., a chatbot, a robot) infers a human's intention and then selects actions to help the human reach that goal. This approach requires inferring intentions, which can be difficult in high-dimensional settings. We build upon prior work that studies assistance through the lens of empowerment: an assistive agent aims to maximize the influence of the human's actions such that they exert a greater control over the environmental outcomes and can solve tasks in fewer steps. We lift the major limitation of prior work in this area---scalability to high-dimensional settings---with contrastive successor representations. We formally prove that these representations estimate a similar notion of empowerment to that studied by prior work and provide a ready-made mechanism for optimizing it.
+Empirically, our proposed method outperforms prior methods on synthetic benchmarks, and scales to Overcooked, a cooperative game setting. Theoretically, our work connects ideas from information theory, neuroscience, and reinforcement learning, and charts a path for representations to play a critical role in solving assistive problems.
+            </p>
         </section>
-
         <section>
-            <h2>Methodology</h2>
-            <p>Describe your methodology here...</p>
+            <h2>Key Insight: Empowerment via Successor Representations</h2>
+            <p>Our core contribution is a novel objective for training agents that are intrinsically motivated to assist humans without requiring a model of the human's reward function. Our objective, Empowerment via Successor Representations (ESR), maximizes the influence of the human's actions on the environment, and, unlike past approaches for assistance without reward inference, is based on a scalable model-free objective that can be derived from learned successor features that encode which states the human is likely to want to reach given their current action. Our objective empowers the human to reach the desired states, not all states, without assuming a human model.</p>
+            <p>Our method will learn three representations:</p>
+            <ol>
+                <li>$\phi(s,\ar,\ah)$ -- This representation can be understood as a sort of latent-space model, predicting the future representation given the current state $s$ and the human's current action $\ah$ as well as the robot's current action $\ar$.</li>
+                <li>$\phi'(s,\ar)$ -- This representation can be understood as an uncontrolled model, predicting the representation of a future state without reference to the current human action $\ah$. This representation is analogous to a value function.</li>
+                <li>$\psi(s^+)$ -- This is a representation of a future state.</li>
+            </ol>
+            <p>We then use these learned representations to compute the
+                approximate empowerment reward:</p>
+            $$r(s, \ar) = (\phi(s_t, \ar, \ah) - \phi(s_t, \ar))^T \psi(g)$$
         </section>
 
         <section>
