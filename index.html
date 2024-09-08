@@ -171,14 +171,6 @@
       </section>
       <section>
         <h2>Analyzing the Empowerment Objective</h2>
-        <img src="figures/grid10_100.gif">
-        <p class="caption"><b>Visualizing Training Empowerment</b> in a 5x5 Gridworld with 10 obstacles.
-          The human gets reward from reaching a goal square. The assistive agent can
-          move the obstacles to open up a path to the goal. Our method learns to maximize
-          the mutual information between the human's action and their future state conditioned on their current state.
-          This corresponds to maximizing the volume of the state marginal polytope,
-          which is proportional to the number of states that the human can reach from their current position.
-        </p>
         <p>
           The key insight behind the ESR algorithm is that by maximizing a notion of human empowerment in the
           environment, we avoid needing to infer the human's objectives (or know them in advance).
@@ -220,6 +212,19 @@
           \begin{align}
             \pir^* \in \arg\min_{\pir} \biggl(\min_{\rho(s) \in \mathcal{C}^{\pir}} \max_{r(s)} \min_{\rho^* \in \mathcal{C}^{\pir}} \max_{\rho^+ \in \mathcal{C}^{\pir}} \E_{\rho^+(s)}[r(s)] - \E_{\rho^*(s)}[r(s)] + D_\text{KL}(\rho^*(s) \| \rho(s)) \biggr).
           \end{align}
+        </p>
+      </section>
+
+      <section>
+        <h2>Visualizing Training and the Learned Representations</h2>
+        <img src="figures/grid10_100.gif">
+        <p class="caption"><b>Visualizing Training Empowerment</b> in a 5x5 Gridworld with 10 obstacles.
+            The human gets reward from reaching a goal square. The assistive agent can
+          move the obstacles to open up a path to the goal. Our method learns to maximize
+          the mutual information between the human's action and their future state conditioned on their current state.
+          This corresponds to maximizing the volume of the state marginal polytope,
+          which is proportional to the number of states that the human can reach from their current position.
+          To visualize the representations, we set the latent dimension to 3 instead of 100.
         </p>
       </section>
 
