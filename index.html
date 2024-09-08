@@ -33,6 +33,16 @@
       id="MathJax-script"
       async
       src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-svg.js"></script>
+    <script>
+      function selectContent(query) {
+        var range = document.createRange()
+        var selection = window.getSelection()
+        var elem = document.querySelector(query)
+        range.selectNodeContents(elem)
+        selection.removeAllRanges()
+        selection.addRange(range)
+      }
+    </script>
   </head>
   <body>
     <script type="text/javascript">
@@ -130,14 +140,14 @@
         <h2>Our Method: Empowerment via Successor Representations</h2>
         <p>
           Our core contribution is a novel objective for training agents that are intrinsically motivated to assist
-          humans without requiring a model of the human's reward function. Our objective, Empowerment via Successor
-          Representations (ESR), maximizes the influence of the human's actions on the environment, and, unlike past
+          humans without requiring a model of the human's reward function. Our objective, <b>Empowerment via Successor
+              Representations (ESR)</b>, maximizes the influence of the human's actions on the environment, and, unlike past
           approaches for assistance without reward inference, is based on a scalable model-free objective that can be
           derived from learned successor features that encode which states the human is likely to want to reach given
           their current action. Our objective empowers the human to reach the desired states, not all states, without
           assuming a human model.
         </p>
-        <p>Our method will learn three representations:</p>
+        <p>Our method learns three representations:</p>
         <ol>
           <li>
             $\phi(s,\ar,\ah)$ -- This representation can be understood as a sort of latent-space model, predicting the
@@ -152,12 +162,21 @@
           <li>$\psi(s^+)$ -- This is a representation of a future state.</li>
         </ol>
         <p>We then use these learned representations to compute the approximate empowerment reward:</p>
-        $$r(s, \ar) = (\phi(s_t, \ar, \ah) - \phi(s_t, \ar))^T \psi(g)$$
+        $$r(s, \ar) = \bigl(\phi(s_t, \ar, \ah) - \phi(s_t, \ar)\bigr)^T \psi(g)$$
         <p>which we use to train an assistive policy <em>without estimating the human's reward.</em></p>
       </section>
       <section>
         <h2>Analyzing the Empowerment Objective</h2>
-        <p></p>
+        <p>
+          The key insight behind the ESR algorithm is that by maximizing a notion of human empowerment in the
+          environment, we avoid needing to infer the human's objectives (or know them in advance).
+        </p>
+        <img src="figures/infogeom.svg" class="figure infogeom" />
+        <p>
+          In the special case where the human is maximizing a family of reward functions for different skills, we show
+          that empowerment enables optimal assistance.
+        </p>
+        <img src="figures/lemma.svg" class="figure lemma" />
       </section>
 
       <section>
@@ -166,40 +185,28 @@
           Our approach learns to assist a simulated human in a Gridworld environment augmented with varying numbers of
           obstacles, as well as the Overcooked benchmark.
         </p>
-        <img src="figures/gridplots.svg" />
-        <img src="figures/overcooked_table.svg" />
+        <img src="figures/gridplots.svg" class="figure plots" />
+        <img src="figures/overcooked_table.svg" class="figure table" />
       </section>
 
       <!-- <section> -->
       <!--   <h2>Discussion</h2> -->
-      <!--   <p>Discuss your findings here...</p> -->
       <!-- </section> -->
 
       <!-- <section> -->
       <!--   <h2>Conclusion</h2> -->
       <!--   <p>Summarize your conclusions here...</p> -->
       <!-- </section> -->
-    </main>
 
-    <section>
-      <h2>BibTeX</h2>
-      <pre id="bibtex" onclick="selectContent('#bibtex')"><code>@misc{myers2024learning,
+      <section>
+        <h2>BibTeX</h2>
+        <pre id="bibtex" onclick="selectContent('#bibtex')"><code>@misc{myers2024learning,
   title = {Learning to {{Assist Humans}} without {{Inferring Rewards}}},
   author = {Myers, Vivek and Ellis, Evan and Eysenbach, Benjamin and Levine, Sergey and Dragan, Anca},
   year = {2024},
   month = jul,
 }</code></pre>
-    </section>
-
-    <script>
-      function selectContent(query) {
-        var range = document.createRange()
-        var selection = window.getSelection()
-        var elem = document.querySelector(query)
-        range.selectNodeContents(elem)
-        selection.removeAllRanges()
-        selection.addRange(range)
-      }
-    </script>
+      </section>
+    </main>
   </body>
 </html>

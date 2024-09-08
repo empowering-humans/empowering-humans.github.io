@@ -175,3 +175,36 @@ pre {
   margin-right: 0.5em;
 }
 
+.infogeom {
+    margin: 4ex auto;
+    width: 70%;
+}
+
+.figure.lemma {
+  width: 70%;
+}
+
+.figure.plots {
+  width: 80%;
+}
+
+.figure.table {
+  width: 80%;
+}
+
+.figure + .figure {
+  margin-top: 6ex;
+}
+
+.figure {
+  display: flex;
+  justify-content: center;
+  margin: 3ex auto;
+  margin-bottom: 4ex;
+}
+
+section + section {
+  margin: 2em 0;
+  border-top: 1px solid #ddd;
+  padding-top: 1em 0;
+}
