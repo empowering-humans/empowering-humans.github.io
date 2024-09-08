@@ -95,20 +95,20 @@
     </header>
 
     <main>
-<!--      <div class="centered">-->
-<!--        <img style="margin: 0" src="figures/coord_ring_collab_onion-cut.gif" />-->
-<!--      </div>-->
-<!--      <div class="centered">-->
-<!--        <div class="gif_legend">-->
-<!--          <img src="figures/human_triangle.svg" />-->
-<!--          <p>Human Policy</p>-->
-<!--        </div>-->
-<!--        <div class="gif_legend">-->
-<!--          <img src="figures/esr_triangle.svg" />-->
-<!--          <p>Empowerment Policy (ESR)</p>-->
-<!--        </div>-->
-<!--      </div>-->
-        <img src="figures/coord_ring_demo.svg"/>
+      <!--      <div class="centered">-->
+      <!--        <img style="margin: 0" src="figures/coord_ring_collab_onion-cut.gif" />-->
+      <!--      </div>-->
+      <!--      <div class="centered">-->
+      <!--        <div class="gif_legend">-->
+      <!--          <img src="figures/human_triangle.svg" />-->
+      <!--          <p>Human Policy</p>-->
+      <!--        </div>-->
+      <!--        <div class="gif_legend">-->
+      <!--          <img src="figures/esr_triangle.svg" />-->
+      <!--          <p>Empowerment Policy (ESR)</p>-->
+      <!--        </div>-->
+      <!--      </div>-->
+      <img src="figures/coord_ring_demo.svg" />
       <section>
         <h2>Abstract</h2>
         <p>
@@ -162,30 +162,44 @@
 
       <section>
         <h2>Results</h2>
-        <p>Present your results here...</p>
-        <div class="chart">
-          <!-- Replace this div with your actual chart or visualization -->
-          <p>Your chart or visualization goes here</p>
-        </div>
+        <p>
+          Our approach learns to assist a simulated human in a Gridworld environment augmented with varying numbers of
+          obstacles, as well as the Overcooked benchmark.
+        </p>
+        <img src="figures/gridplots.svg" />
+        <img src="figures/overcooked_table.svg" />
       </section>
 
-      <section>
-        <h2>Discussion</h2>
-        <p>Discuss your findings here...</p>
-      </section>
+      <!-- <section> -->
+      <!--   <h2>Discussion</h2> -->
+      <!--   <p>Discuss your findings here...</p> -->
+      <!-- </section> -->
 
-      <section>
-        <h2>Conclusion</h2>
-        <p>Summarize your conclusions here...</p>
-      </section>
+      <!-- <section> -->
+      <!--   <h2>Conclusion</h2> -->
+      <!--   <p>Summarize your conclusions here...</p> -->
+      <!-- </section> -->
     </main>
 
+    <section>
+      <h2>BibTeX</h2>
+      <pre id="bibtex" onclick="selectContent('#bibtex')"><code>@misc{myers2024learning,
+  title = {Learning to {{Assist Humans}} without {{Inferring Rewards}}},
+  author = {Myers, Vivek and Ellis, Evan and Eysenbach, Benjamin and Levine, Sergey and Dragan, Anca},
+  year = {2024},
+  month = jul,
+}</code></pre>
+    </section>
+
     <script>
-      // You can add any necessary JavaScript here
-      document.addEventListener("DOMContentLoaded", (event) => {
-        console.log("DOM fully loaded and parsed")
-        // Add your custom JavaScript functionality here
-      })
+      function selectContent(query) {
+        var range = document.createRange()
+        var selection = window.getSelection()
+        var elem = document.querySelector(query)
+        range.selectNodeContents(elem)
+        selection.removeAllRanges()
+        selection.addRange(range)
+      }
     </script>
   </body>
 </html>
