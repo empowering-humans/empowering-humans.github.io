@@ -62,6 +62,10 @@
             robot: "\\textbf{R}",
             ar: "a^{\\human}",
             ah: "a^{\\robot}",
+            pih: "\\pi_H",
+            pir: "\\pi_R",
+            E: "\\mathbb{E}",
+            sfut: "\\mathfrak{s}^+"
           },
         },
         svg: {
@@ -168,16 +172,55 @@
       <section>
         <h2>Analyzing the Empowerment Objective</h2>
         <img src="figures/grid10_100.gif">
+        <p class="caption"><b>Visualizing Training Empowerment</b> in a 5x5 Gridworld with 10 obstacles.
+          The human gets reward from reaching a goal square. The assistive agent can
+          move the obstacles to open up a path to the goal. Our method learns to maximize
+          the mutual information between the human's action and their future state conditioned on their current state.
+          This corresponds to maximizing the volume of the state marginal polytope,
+          which is proportional to the number of states that the human can reach from their current position.
+        </p>
         <p>
           The key insight behind the ESR algorithm is that by maximizing a notion of human empowerment in the
           environment, we avoid needing to infer the human's objectives (or know them in advance).
         </p>
-        <img src="figures/infogeom.svg" class="figure infogeom" />
+        <div class="triple">
+          <img src="figures/simplex.png"/>
+          <img src="figures/visualizing_skills.png"/>
+          <img src="figures/visualizing_empowerment_v2.png"/>
+        </div>
+        <div class="triple">
+          <p>(a) State marginal polytope</p>
+          <p>(b) Mutual information</p>
+          <p>(c) Maximizing empowerment</p>
+        </div>
+        <p class="caption">
+          <b>The Information Geometry of Empowerment.</b> <em>(Left)</em> For a given state $s_t$ and assistant policy $\pir$,
+          we plot the distribution over future states for 6 choices of the human policy $\pih$.
+          In a 3-state MDP, we can represent each policy as a vector lying on the 2-dimensional probability simplex.
+          We refer to the set of all possible state distributions as the <em>state marginal polytope</em>.
+          <em>(Center)</em> Mutual information corresponds to the distance between the center of the polytope and the vertices that are maximally far away.
+          <em>(Right)</em> Empowerment corresponds to maximizing the size of this polytope.
+          For example, when an assistive agent moves an obstacle out of a human user's way, the human user can spend more time at desired state.
+        </p>
         <p>
           In the special case where the human is maximizing a family of reward functions for different skills, we show
           that empowerment enables optimal assistance.
         </p>
-        <img src="figures/lemma.svg" class="figure lemma" />
+        <p>
+          <b>Lemma 3.</b>
+	      Assume that a human has learned skills $\pi(a \mid s, z)$ by maximizing mutual information $I(\sfut; z)$
+          and adapts to a reward function by minimizing the regularized regret:
+            $$\begin{align}
+                \min_{\rho^* \in \mathcal{C}^{\pir}} \max_{\rho^+ \in \mathcal{C}} \E_{\rho^+(s)}[r(s)] - \E_{\rho^*(s)}[r(s)] + D_\text{KL}\bigl(\rho^*(s) \| \rho(s)\bigr).
+            \end{align}$$
+          We assume that the human chooses the prior $\rho(s)$ that minimizes this regret for the worst-case choice of reward function (i.e., the minimax optimal prior).
+          An assistive agent that maximizes $I^{\pir}(\sfut; z)$ minimizes the worst-case (regularized) regret incurred by the human.
+
+          Letting $\pir^* \in \arg\max_{\pir} I^{\pir}(\sfut; z)$, we have
+          \begin{align}
+            \pir^* \in \arg\min_{\pir} \biggl(\min_{\rho(s) \in \mathcal{C}^{\pir}} \max_{r(s)} \min_{\rho^* \in \mathcal{C}^{\pir}} \max_{\rho^+ \in \mathcal{C}^{\pir}} \E_{\rho^+(s)}[r(s)] - \E_{\rho^*(s)}[r(s)] + D_\text{KL}(\rho^*(s) \| \rho(s)) \biggr).
+          \end{align}
+        </p>
       </section>
 
       <section>
