@@ -3,12 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="static/css/index.css" />
     <link rel="stylesheet" href="./static/css/fontawesome.all.min.css" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" />
     <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-solarizedlight.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs-bibtex@2.1.0/prism-bibtex.min.js"></script>
+    <link rel="stylesheet" href="static/css/index.css" />
 
     <title>Learning to Assist Humans without Inferring Rewards</title>
 
@@ -67,7 +72,9 @@
             pih: "\\pi_{\\mathbf{H}}",
             pir: "\\pi_{\\mathbf{R}}",
             E: "\\mathbb{E}",
-            sfut: "\\mathfrak{s}^+",
+            S: "\\mathcal{S}",
+            sfut: "\\mathfrak{s}^{\\gamma}_{+}",
+            emp: "\\mathcal{E}",
           },
         },
         svg: {
@@ -124,6 +131,7 @@
       <!--          <p>Empowerment Policy (ESR)</p>-->
       <!--        </div>-->
       <!--      </div>-->
+
       <img src="figures/coord_ring_demo.svg" />
       <section>
         <h2>Abstract</h2>
@@ -176,8 +184,8 @@
       <section>
         <h2>Analyzing the Empowerment Objective</h2>
         <p>
-          The key insight behind the ESR algorithm is that by maximizing a notion of human empowerment in the
-          environment, we avoid needing to infer the human's objectives (or know them in advance).
+          The key insight behind the <b>ESR</b> algorithm is that by maximizing a notion of human empowerment
+          in the environment, we avoid needing to infer the human's objectives (or know them in advance).
         </p>
         <div class="triple">
           <img src="figures/simplex.png" />
@@ -190,15 +198,15 @@
           <p>(c) Maximizing empowerment</p>
         </div>
         <p class="caption">
-          <b>The Information Geometry of Empowerment.</b> <em>(Left)</em> For a given state $s_t$ and
-          assistant policy $\pir$, we plot the distribution over future states for 6 choices of the human
-          policy $\pih$. In a 3-state MDP, we can represent each policy as a vector lying on the 2-dimensional
-          probability simplex. We refer to the set of all possible state distributions as the
-          <em>state marginal polytope</em>. <em>(Center)</em> Mutual information corresponds to the distance
+          <b>The Information Geometry of Empowerment.</b> <em>(a)</em> For a given state $s_t$ and assistant
+          policy $\pir$, we plot the distribution over future states for 6 choices of the human policy $\pih$.
+          In a 3-state MDP, we can represent each policy as a vector lying on the 2-dimensional probability
+          simplex. We refer to the set of all possible state distributions as the
+          <em>state marginal polytope</em>. <em>(b)</em> Mutual information corresponds to the distance
           between the center of the polytope and the vertices that are maximally far away.
-          <em>(Right)</em> Empowerment corresponds to maximizing the size of this polytope. For example, when
-          an assistive agent moves an obstacle out of a human user's way, the human user can spend more time
-          at desired state.
+          <em>(c)</em> Empowerment corresponds to maximizing the size of this polytope. For example, when an
+          assistive agent moves an obstacle out of a human user's way, the human user can spend more time at
+          desired state.
         </p>
         <p>
           In the special case where the human is maximizing a family of reward functions for different skills,
@@ -207,11 +215,10 @@
         <p>
           <b>Assumption 3.1</b> (Skill Coverage)<b>.</b>
           <i
-            >The rewards $R \sim \mathcal{R}$ are uniformly distributed over the scaled
-            $|\mathcal{S}|$-simplex $\Delta^{|\mathcal{S}|}$ such that:
-            $$\bigl(R+\tfrac{1}{|\mathcal{S}|}\bigr)\bigl(\tfrac{1}{ 1-\gamma }\bigr) \sim
-            \operatorname{Unif}\bigl( \Delta^{|\mathcal{S}|} \bigr) =
-            \operatorname{Dirichlet}(\hspace{.5ex}\underbrace{\hspace{-.5ex}1,1,\ldots,1\hspace{-.5ex}}_{\text{$|\mathcal{S}|$
+            >The rewards $R \sim \mathcal{R}$ are uniformly distributed over the scaled $|\S|$-simplex
+            $\Delta^{|\S|}$ such that: $$\bigl(R+\tfrac{1}{|\S|}\bigr)\bigl(\tfrac{1}{ 1-\gamma }\bigr) \sim
+            \operatorname{Unif}\bigl( \Delta^{|\S|} \bigr) =
+            \operatorname{Dirichlet}(\hspace{.5ex}\underbrace{\hspace{-.5ex}1,1,\ldots,1\hspace{-.5ex}}_{\text{$|\S|$
             times}}\hspace{.5ex}). \label{eq:uniform}$$
           </i>
         </p>
@@ -219,7 +226,7 @@
           <b>Assumption 3.2</b> (Ergodicity)<b>.</b>
           <i>
             For some \(\pih, \pir\), we have $$ \operatorname{P}^{\pih,\pir}(\sfut = s \mid s_0) > 0 \quad
-            \text{for all } s \in \mathcal{S}, \gamma \in (0,1). \label{eq:ergodic} $$
+            \text{for all } s \in \S, \gamma \in (0,1). \label{eq:ergodic} $$
           </i>
         </p>
         Our main theoretical result is <b>Theorem 3.1</b>, which shows that under these assumptions,
@@ -229,20 +236,20 @@
           <b>Theorem 3.1.</b>
           <i>
             Under <b>Assumption 3.1</b> and <b>Assumption 3.2</b> for sufficiently large \(\gamma\) and any
-            \(\beta>0\), $$ \mathcal{E}_{\gamma}(\pih,\pir)^{1/2} \le (\beta /
+            \(\beta>0\), $$ \emp_{\gamma}(\pih,\pir)^{1/2} \le (\beta /
             e)\,\mathcal{J}_{\pi_{\mathbf{R}}}^\gamma(\pih). $$
           </i>
         </p>
       </section>
-      The proof is in Appendix B.1 of the paper. To the best of our knowledge, this result provides the first
-      formal link between empowerment maximization and reward maximization. This motivates us to develop a
-      scalable algorithm for empowerment maximization, which we introduce in the following section.
+      The proof is in <b>Appendix B.1</b> of the paper. To the best of our knowledge, this result provides the
+      first formal link between empowerment maximization and reward maximization. This motivates us to develop
+      a scalable algorithm for empowerment maximization, which we introduce in the following section.
 
       <section>
         <h2>Visualizing Training and the Learned Representations</h2>
-        <img src="figures/grid10_100.gif" />
+        <img src="figures/emp_grid_horiz.gif" />
         <p class="caption">
-          <b>Visualizing Training Empowerment</b> in a 5x5 Gridworld with 10 obstacles. The human gets reward
+          <b>Visualizing Training Empowerment in a 5x5 Gridworld with 10 obstacles.</b> The human gets reward
           from reaching a goal square. The assistive agent can move the obstacles to open up a path to the
           goal. Our method learns to maximize the mutual information between the human's action and their
           future state conditioned on their current state. This corresponds to maximizing the volume of the
@@ -255,28 +262,24 @@
       <section>
         <h2>Results</h2>
         <p>
-          Our approach learns to assist a simulated human in a Gridworld environment augmented with varying
-          numbers of obstacles, as well as the Overcooked benchmark.
+          Our <b>ESR</b> approach learns to assist a simulated human in a Gridworld environment augmented with
+          varying numbers of obstacles. As the complexity of the environment increases, <b>ESR</b> remains
+          effective, while the other assistance algorithms struggle.
         </p>
         <img src="figures/gridplots.svg" class="figure plots" />
+        <p>
+          We also evaluate our method in the Overcooked environment, a cooperative cooking game. We find that
+          <b>ESR</b> outperforms prior methods that assist the human without knowing their reward function.
+        </p>
         <img src="figures/overcooked_table.svg" class="figure table" />
       </section>
-
-      <!-- <section> -->
-      <!--   <h2>Discussion</h2> -->
-      <!-- </section> -->
-
-      <!-- <section> -->
-      <!--   <h2>Conclusion</h2> -->
-      <!--   <p>Summarize your conclusions here...</p> -->
-      <!-- </section> -->
 
       <section>
         <h2>
           ${\bf B\kern-.05em{\small I\kern-.025em B}\kern-.08em
           T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}$
         </h2>
-        <pre id="bibtex" onclick="selectContent('#bibtex')"><code>@inproceedings{myers2024learninga,
+        <pre class="language-bibtex bibtex" id="bibtex" onclick="selectContent('#bibtex')"><code>@inproceedings{myers2024learninga,
   author    = {Myers, Vivek and Ellis, Evan and Levine, Sergey and Eysenbach, Benjamin and Dragan, Anca},
   booktitle = {{Conference} on {Neural Information Processing Systems}},
   month     = dec,

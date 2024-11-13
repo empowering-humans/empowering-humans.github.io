@@ -98,12 +98,17 @@ pre {
   font-size: 15pt;
 }
 
+.author {
+  font-weight: bold;
+}
+
 .author + .author {
   margin-left: 1em;
 }
 
 .university.affil-1:before {
   content: "1";
+  font-weight: normal;
   font-size: 10pt;
   vertical-align: super;
   display: inline-block;
@@ -111,6 +116,7 @@ pre {
 
 .university.affil-2:before {
   content: "2";
+  font-weight: normal;
   font-size: 10pt;
   vertical-align: super;
   display: inline-block;
@@ -119,6 +125,7 @@ pre {
 
 .author.affil-1:after {
   content: "1";
+  font-weight: normal;
   font-size: 11pt;
   width: 0.5pt;
   vertical-align: super;
@@ -127,6 +134,7 @@ pre {
 
 .author.affil-2:after {
   content: "2";
+  font-weight: normal;
   font-size: 11pt;
   width: 0.5pt;
   vertical-align: super;
@@ -228,4 +236,22 @@ section + section {
 
 .triple p {
   text-align: center;
+}
+
+pre[class*="language-"] {
+  font-size: 10pt;
+  background-color: #f0f0f0;
+}
+
+code[class*="language-"] ::selection,
+code[class*="language-"]::selection,
+pre[class*="language-"] ::selection,
+pre[class*="language-"]::selection {
+  background-color: #bbbfc0;
+}
+
+.bibtex code {
+  background: none;
+  white-space: pre-wrap;
+  border: none;
 }
