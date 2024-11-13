@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="static/css/index.css" />
     <link rel="stylesheet" href="./static/css/fontawesome.all.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" />
     <script defer src="./static/js/fontawesome.all.min.js"></script>
 
     <title>Learning to Assist Humans without Inferring Rewards</title>
@@ -62,8 +64,8 @@
             robot: "\\textbf{R}",
             ar: "a^{\\human}",
             ah: "a^{\\robot}",
-            pih: "\\pi_H",
-            pir: "\\pi_R",
+            pih: "\\pi_{\\mathbf{H}}",
+            pir: "\\pi_{\\mathbf{R}}",
             E: "\\mathbb{E}",
             sfut: "\\mathfrak{s}^+",
           },
@@ -77,7 +79,7 @@
       <h1>Learning to Assist Humans without Inferring Rewards</h1>
       <div class="authors">
         <span class="author affil-1">Vivek Myers</span> <span class="author affil-1">Evan Ellis</span>
-        <span class="author affil-2">Ben Eysenbach</span> <span class="author affil-1">Sergey Levine</span>
+        <span class="author affil-1">Sergey Levine</span> <span class="author affil-2">Ben Eysenbach</span>
         <span class="author affil-1">Anca Dragan</span>
       </div>
       <div class="affiliations">
@@ -91,7 +93,7 @@
           </a>
         </span>
         <span class="link">
-          <a href="about:blank" class="button">
+          <a href="https://arxiv.org/abs/2411.02623" class="button">
             <span class="icon"><i class="ai ai-arxiv"></i></span><span>arXiv</span>
           </a>
         </span>
@@ -101,7 +103,7 @@
         <!--   </a> -->
         <!-- </span> -->
         <span class="link">
-          <a href="about:blank" class="button">
+          <a href="https://github.com/vivekmyers/empowerment_successor_representations" class="button">
             <span class="icon"><i class="fas fa-code"></i></span><span>Code</span>
           </a>
         </span>
@@ -126,42 +128,44 @@
       <section>
         <h2>Abstract</h2>
         <p>
-          Assistive agents should make humans' lives easier. Classically, such assistance is studied through the lens of
-          inverse reinforcement learning, where an assistive agent (e.g., a chatbot, a robot) infers a human's intention
-          and then selects actions to help the human reach that goal. This approach requires inferring intentions, which
-          can be difficult in high-dimensional settings. We build upon prior work that studies assistance through the
-          lens of empowerment: an assistive agent aims to maximize the influence of the human's actions such that they
-          exert a greater control over the environmental outcomes and can solve tasks in fewer steps. We lift the major
-          limitation of prior work in this area---scalability to high-dimensional settings---with contrastive successor
-          representations. We formally prove that these representations estimate a similar notion of empowerment to that
-          studied by prior work and provide a ready-made mechanism for optimizing it. Empirically, our proposed method
-          outperforms prior methods on synthetic benchmarks, and scales to Overcooked, a cooperative game setting.
-          Theoretically, our work connects ideas from information theory, neuroscience, and reinforcement learning, and
-          charts a path for representations to play a critical role in solving assistive problems.
+          Assistive agents should make humans' lives easier. Classically, such assistance is studied through
+          the lens of inverse reinforcement learning, where an assistive agent (e.g., a chatbot, a robot)
+          infers a human's intention and then selects actions to help the human reach that goal. This approach
+          requires inferring intentions, which can be difficult in high-dimensional settings. We build upon
+          prior work that studies assistance through the lens of empowerment: an assistive agent aims to
+          maximize the influence of the human's actions such that they exert a greater control over the
+          environmental outcomes and can solve tasks in fewer steps. We lift the major limitation of prior
+          work in this area---scalability to high-dimensional settings---with contrastive successor
+          representations. We formally prove that these representations estimate a similar notion of
+          empowerment to that studied by prior work and provide a ready-made mechanism for optimizing it.
+          Empirically, our proposed method outperforms prior methods on synthetic benchmarks, and scales to
+          Overcooked, a cooperative game setting. Theoretically, our work connects ideas from information
+          theory, neuroscience, and reinforcement learning, and charts a path for representations to play a
+          critical role in solving assistive problems.
         </p>
       </section>
       <section>
         <h2>Our Method: Empowerment via Successor Representations</h2>
         <p>
-          Our core contribution is a novel objective for training agents that are intrinsically motivated to assist
-          humans without requiring a model of the human's reward function. Our objective,
-          <b>Empowerment via Successor Representations (ESR)</b>, maximizes the influence of the human's actions on the
-          environment, and, unlike past approaches for assistance without reward inference, is based on a scalable
-          model-free objective that can be derived from learned successor features that encode which states the human is
-          likely to want to reach given their current action. Our objective empowers the human to reach the desired
-          states, not all states, without assuming a human model.
+          Our core contribution is a novel objective for training agents that are intrinsically motivated to
+          assist humans without requiring a model of the human's reward function. Our objective,
+          <b>Empowerment via Successor Representations (ESR)</b>, maximizes the influence of the human's
+          actions on the environment, and, unlike past approaches for assistance without reward inference, is
+          based on a scalable model-free objective that can be derived from learned successor features that
+          encode which states the human is likely to want to reach given their current action. Our objective
+          empowers the human to reach the desired states, not all states, without assuming a human model.
         </p>
         <p>Our method learns three representations:</p>
         <ol>
           <li>
-            $\phi(s,\ar,\ah)$ -- This representation can be understood as a sort of latent-space model, predicting the
-            future representation given the current state $s$ and the human's current action $\ah$ as well as the
-            robot's current action $\ar$.
+            $\phi(s,\ar,\ah)$ -- This representation can be understood as a sort of latent-space model,
+            predicting the future representation given the current state $s$ and the human's current action
+            $\ah$ as well as the robot's current action $\ar$.
           </li>
           <li>
             $\phi'(s,\ar)$ -- This representation can be understood as an uncontrolled model, predicting the
-            representation of a future state without reference to the current human action $\ah$. This representation is
-            analogous to a value function.
+            representation of a future state without reference to the current human action $\ah$. This
+            representation is analogous to a value function.
           </li>
           <li>$\psi(s^+)$ -- This is a representation of a future state.</li>
         </ol>
@@ -186,52 +190,73 @@
           <p>(c) Maximizing empowerment</p>
         </div>
         <p class="caption">
-          <b>The Information Geometry of Empowerment.</b> <em>(Left)</em> For a given state $s_t$ and assistant policy
-          $\pir$, we plot the distribution over future states for 6 choices of the human policy $\pih$. In a 3-state
-          MDP, we can represent each policy as a vector lying on the 2-dimensional probability simplex. We refer to the
-          set of all possible state distributions as the <em>state marginal polytope</em>. <em>(Center)</em> Mutual
-          information corresponds to the distance between the center of the polytope and the vertices that are maximally
-          far away. <em>(Right)</em> Empowerment corresponds to maximizing the size of this polytope. For example, when
-          an assistive agent moves an obstacle out of a human user's way, the human user can spend more time at desired
-          state.
+          <b>The Information Geometry of Empowerment.</b> <em>(Left)</em> For a given state $s_t$ and
+          assistant policy $\pir$, we plot the distribution over future states for 6 choices of the human
+          policy $\pih$. In a 3-state MDP, we can represent each policy as a vector lying on the 2-dimensional
+          probability simplex. We refer to the set of all possible state distributions as the
+          <em>state marginal polytope</em>. <em>(Center)</em> Mutual information corresponds to the distance
+          between the center of the polytope and the vertices that are maximally far away.
+          <em>(Right)</em> Empowerment corresponds to maximizing the size of this polytope. For example, when
+          an assistive agent moves an obstacle out of a human user's way, the human user can spend more time
+          at desired state.
         </p>
         <p>
-          In the special case where the human is maximizing a family of reward functions for different skills, we show
-          that empowerment enables optimal assistance.
+          In the special case where the human is maximizing a family of reward functions for different skills,
+          we show that empowerment enables optimal assistance.
         </p>
         <p>
-          <b>Lemma 3.</b>
-          Assume that a human has learned skills $\pi(a \mid s, z)$ by maximizing mutual information $I(\sfut; z)$ and
-          adapts to a reward function by minimizing the regularized regret: $$\begin{align} \min_{\rho^* \in
-          \mathcal{C}^{\pir}} \max_{\rho^+ \in \mathcal{C}} \E_{\rho^+(s)}[r(s)] - \E_{\rho^*(s)}[r(s)] +
-          D_\text{KL}\bigl(\rho^*(s) \| \rho(s)\bigr). \end{align}$$ We assume that the human chooses the prior
-          $\rho(s)$ that minimizes this regret for the worst-case choice of reward function (i.e., the minimax optimal
-          prior). An assistive agent that maximizes $I^{\pir}(\sfut; z)$ minimizes the worst-case (regularized) regret
-          incurred by the human. Letting $\pir^* \in \arg\max_{\pir} I^{\pir}(\sfut; z)$, we have \begin{align} \pir^*
-          \in \arg\min_{\pir} \biggl(\min_{\rho(s) \in \mathcal{C}^{\pir}} \max_{r(s)} \min_{\rho^* \in
-          \mathcal{C}^{\pir}} \max_{\rho^+ \in \mathcal{C}^{\pir}} \E_{\rho^+(s)}[r(s)] - \E_{\rho^*(s)}[r(s)] +
-          D_\text{KL}(\rho^*(s) \| \rho(s)) \biggr). \end{align}
+          <b>Assumption 3.1</b> (Skill Coverage)<b>.</b>
+          <i
+            >The rewards $R \sim \mathcal{R}$ are uniformly distributed over the scaled
+            $|\mathcal{S}|$-simplex $\Delta^{|\mathcal{S}|}$ such that:
+            $$\bigl(R+\tfrac{1}{|\mathcal{S}|}\bigr)\bigl(\tfrac{1}{ 1-\gamma }\bigr) \sim
+            \operatorname{Unif}\bigl( \Delta^{|\mathcal{S}|} \bigr) =
+            \operatorname{Dirichlet}(\hspace{.5ex}\underbrace{\hspace{-.5ex}1,1,\ldots,1\hspace{-.5ex}}_{\text{$|\mathcal{S}|$
+            times}}\hspace{.5ex}). \label{eq:uniform}$$
+          </i>
+        </p>
+        <p>
+          <b>Assumption 3.2</b> (Ergodicity)<b>.</b>
+          <i>
+            For some \(\pih, \pir\), we have $$ \operatorname{P}^{\pih,\pir}(\sfut = s \mid s_0) > 0 \quad
+            \text{for all } s \in \mathcal{S}, \gamma \in (0,1). \label{eq:ergodic} $$
+          </i>
+        </p>
+        Our main theoretical result is <b>Theorem 3.1</b>, which shows that under these assumptions,
+        maximizing empowerment yields a lower bound on the (squared) average-case reward achieved by the human
+        for sufficiently large $\gamma$.
+        <p>
+          <b>Theorem 3.1.</b>
+          <i>
+            Under <b>Assumption 3.1</b> and <b>Assumption 3.2</b> for sufficiently large \(\gamma\) and any
+            \(\beta>0\), $$ \mathcal{E}_{\gamma}(\pih,\pir)^{1/2} \le (\beta /
+            e)\,\mathcal{J}_{\pi_{\mathbf{R}}}^\gamma(\pih). $$
+          </i>
         </p>
       </section>
+      The proof is in Appendix B.1 of the paper. To the best of our knowledge, this result provides the first
+      formal link between empowerment maximization and reward maximization. This motivates us to develop a
+      scalable algorithm for empowerment maximization, which we introduce in the following section.
 
       <section>
         <h2>Visualizing Training and the Learned Representations</h2>
         <img src="figures/grid10_100.gif" />
         <p class="caption">
-          <b>Visualizing Training Empowerment</b> in a 5x5 Gridworld with 10 obstacles. The human gets reward from
-          reaching a goal square. The assistive agent can move the obstacles to open up a path to the goal. Our method
-          learns to maximize the mutual information between the human's action and their future state conditioned on
-          their current state. This corresponds to maximizing the volume of the state marginal polytope, which is
-          proportional to the number of states that the human can reach from their current position. To visualize the
-          representations, we set the latent dimension to 3 instead of 100.
+          <b>Visualizing Training Empowerment</b> in a 5x5 Gridworld with 10 obstacles. The human gets reward
+          from reaching a goal square. The assistive agent can move the obstacles to open up a path to the
+          goal. Our method learns to maximize the mutual information between the human's action and their
+          future state conditioned on their current state. This corresponds to maximizing the volume of the
+          state marginal polytope, which is proportional to the number of states that the human can reach from
+          their current position. To visualize the representations, we set the latent dimension to 3 instead
+          of 100.
         </p>
       </section>
 
       <section>
         <h2>Results</h2>
         <p>
-          Our approach learns to assist a simulated human in a Gridworld environment augmented with varying numbers of
-          obstacles, as well as the Overcooked benchmark.
+          Our approach learns to assist a simulated human in a Gridworld environment augmented with varying
+          numbers of obstacles, as well as the Overcooked benchmark.
         </p>
         <img src="figures/gridplots.svg" class="figure plots" />
         <img src="figures/overcooked_table.svg" class="figure table" />
@@ -247,7 +272,10 @@
       <!-- </section> -->
 
       <section>
-        <h2>${\bf B\kern-.05em{\small I\kern-.025em B}\kern-.08em T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}$</h2>
+        <h2>
+          ${\bf B\kern-.05em{\small I\kern-.025em B}\kern-.08em
+          T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}$
+        </h2>
         <pre id="bibtex" onclick="selectContent('#bibtex')"><code>@inproceedings{myers2024learninga,
   title = {Learning to {{Assist Humans}} without {{Inferring Rewards}}},
   booktitle = {{{ICML}} 2024 {{Workshop}} on {{Models}} of {{Human Feedback}} for {{AI Alignment}}},
